@@ -104,7 +104,7 @@ public class Company {
      * @return true If the registration succeeds, false otherwise.
      */
     public boolean registerProperty(Property property) {
-        if(property == null || clients.contains(property)) {
+        if(property == null || properties.contains(property)) {
             return false;
         } else {
             properties.add(property);
