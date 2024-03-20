@@ -5,13 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
     private Company company;
-    private User client1, client2, seller1, seller2;
+    private User client1, client2, client3, client4, seller1, seller2, seller3, seller4;
     private Property property1, property2;
     private Sell sell1, sell2;
     @BeforeEach
     void setUp() {
         client1 = new User("José Manuel", "911111111", "zemanel@yahoo.com");
         client2 = new User("António Francisco", "922222222", "tochico@hotmail.com");
+        client3 = new User("António Francisco", "922222222", "tochico@hotmail.com");
+        client4 = new User("José Manuel", "911111111", "zemanel@yahoo.com");
         seller1 = new User("Fernando Fernandes", "966777101", "fefe@remax.pt");
         seller2 = new User("Rodrigo Rodrigues", "966777152", "roro@remax.pt");
         property1 = new Property("T3 Monte Belo", 150000.0);
@@ -36,5 +38,27 @@ class CompanyTest {
         assertNotNull(company.getSellers());
         assertNotNull(company.getProperties());
         assertNotNull(company.getSells());
+    }
+    @Test
+    public void testRegisterClient() {
+        assertTrue(company.registerClient(client3));
+    }
+
+    @Test
+    public void testRegisterClients() {
+        assertTrue(company.registerClient(client3));
+        assertTrue(company.registerClient(client4));
+    }
+    @Test
+    public void testRegisterClientDuplicate() {
+        assertEquals(company.registerClient(client1), company.registerClient(client1));
+    }
+    @Test
+    public void testRegisterClientNull() {
+        assertNotNull(company.registerClient(client2));
+    }
+    @Test
+    public void testRegisterSeller() {
+        assertTrue(company.registerSeller(seller1));
     }
 }
