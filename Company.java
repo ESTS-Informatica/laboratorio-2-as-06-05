@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -136,7 +137,11 @@ public class Company {
      * @return true If the request succeeds, false otherwise.
      */
     public boolean createSell(User client, User seller, Property property) {
-        return true;         // dummy implementation
+        if(client != null && seller != null && property != null) {
+            return true;
+        } else {
+            return false;   // dummy implementation
+        }
     }
 
     /**
@@ -146,8 +151,13 @@ public class Company {
      * @return The total number of sells in the year.
      */
     public int calculateSellsOfTheYear(int year) {
-        return 0;         // dummy implementation
-    }
+        for (int i = 0; i < sells.size(); i++) {
+            if (sells.get(i).getDate().getYear() == year) {
+                sells.set(i, sells.get(i));
+            }
+        }
+        return sells.size();
+    }         // dummy implementation
 
     /**
      * Find the seller with more sells within the provided year.
@@ -156,7 +166,22 @@ public class Company {
      * @return The name of the seller of the year.
      */
     public String findSellerOfTheYear(int year) {
-        return null;         // dummy implementation
-    }
+        List<User> sellersList = new ArrayList<>();
+        User topSeller = null;
+        int topValue = 0;
 
+        for (Sell s : sells) {
+            if(s.getDate().getYear() == year){
+                sellersList.add(s.getSeller());
+            }
+        }
+        for (User u : sellersList) {
+            int value = Collections.frequency(sellersList,u);
+            if(value > topValue){
+                topValue = value;
+                topSeller = u;
+            }
+        }
+        return topSeller.getName();         // dummy implementation
+    }
 }

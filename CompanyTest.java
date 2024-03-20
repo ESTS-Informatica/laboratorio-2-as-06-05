@@ -39,6 +39,9 @@ class CompanyTest {
         company.registerProperty(property1);
         company.registerProperty(property2);
 
+        company.createSell(client1, seller1, property1);
+        company.createSell(client2, seller2, property2);
+
         company.registerSell(sell1);
         company.registerSell(sell2);
     }
@@ -110,5 +113,17 @@ class CompanyTest {
         assertFalse(company.registerProperty(property1));
         company.registerProperty(property3);
         assertFalse(company.registerProperty(property3));
+    }
+    @Test
+    public void testCreateSell() {
+        assertTrue(company.createSell(client1, seller1, property1));
+    }
+    @Test
+    public void testCalculateSellsOfTheYear() {
+        assertEquals(2, company.calculateSellsOfTheYear(2024));
+    }
+    @Test
+    public void testFindSellerOfTheYear() {
+        assertEquals("Fernando Fernandes", company.findSellerOfTheYear(2024));
     }
 }
